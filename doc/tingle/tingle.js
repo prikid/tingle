@@ -87,7 +87,7 @@
   }
 
   Modal.prototype.isOpen = function () {
-    return !!this.modal.classList.contains('tingle-modal--visible')
+    return !!this.modal.classList.contains('prk-tingle-modal--visible')
   }
 
   Modal.prototype.open = function () {
@@ -109,14 +109,14 @@
 
     // prevent double scroll
     this._scrollPosition = window.pageYOffset
-    document.body.classList.add('tingle-enabled')
+    document.body.classList.add('prk-tingle-enabled')
     document.body.style.top = -this._scrollPosition + 'px'
 
     // sticky footer
     this.setStickyFooter(this.opts.stickyFooter)
 
     // show modal
-    this.modal.classList.add('tingle-modal--visible')
+    this.modal.classList.add('prk-tingle-modal--visible')
 
     // onOpen callback
     if (typeof self.opts.onOpen === 'function') {
@@ -145,14 +145,14 @@
       }
     }
 
-    document.body.classList.remove('tingle-enabled')
+    document.body.classList.remove('prk-tingle-enabled')
     window.scrollTo({
       top: this._scrollPosition,
       behavior: 'instant'
     })
     document.body.style.top = null
 
-    this.modal.classList.remove('tingle-modal--visible')
+    this.modal.classList.remove('prk-tingle-modal--visible')
 
     // using similar setup as onOpen
     var self = this
@@ -217,7 +217,7 @@
       if (this.modalBox.contains(this.modalBoxFooter)) {
         this.modalBox.removeChild(this.modalBoxFooter)
         this.modal.appendChild(this.modalBoxFooter)
-        this.modalBoxFooter.classList.add('tingle-modal-box__footer--sticky')
+        this.modalBoxFooter.classList.add('prk-tingle-modal-box__footer--sticky')
         _recalculateFooterPosition.call(this)
         this.modalBoxContent.style['padding-bottom'] = this.modalBoxFooter.clientHeight + 20 + 'px'
       }
@@ -228,7 +228,7 @@
         this.modalBoxFooter.style.width = 'auto'
         this.modalBoxFooter.style.left = ''
         this.modalBoxContent.style['padding-bottom'] = ''
-        this.modalBoxFooter.classList.remove('tingle-modal-box__footer--sticky')
+        this.modalBoxFooter.classList.remove('prk-tingle-modal-box__footer--sticky')
       }
     }
 
@@ -270,11 +270,11 @@
 
   Modal.prototype.checkOverflow = function () {
     // only if the modal is currently shown
-    if (this.modal.classList.contains('tingle-modal--visible')) {
+    if (this.modal.classList.contains('prk-tingle-modal--visible')) {
       if (this.isOverflow()) {
-        this.modal.classList.add('tingle-modal--overflow')
+        this.modal.classList.add('prk-tingle-modal--overflow')
       } else {
-        this.modal.classList.remove('tingle-modal--overflow')
+        this.modal.classList.remove('prk-tingle-modal--overflow')
       }
 
       // tODO: remove offset
@@ -307,11 +307,11 @@
   function _build () {
     // wrapper
     this.modal = document.createElement('div')
-    this.modal.classList.add('tingle-modal')
+    this.modal.classList.add('prk-tingle-modal')
 
     // remove cusor if no overlay close method
     if (this.opts.closeMethods.length === 0 || this.opts.closeMethods.indexOf('overlay') === -1) {
-      this.modal.classList.add('tingle-modal--noOverlayClose')
+      this.modal.classList.add('prk-tingle-modal--noOverlayClose')
     }
 
     this.modal.style.display = 'none'
@@ -327,14 +327,14 @@
     if (this.opts.closeMethods.indexOf('button') !== -1) {
       this.modalCloseBtn = document.createElement('button')
       this.modalCloseBtn.type = 'button'
-      this.modalCloseBtn.classList.add('tingle-modal__close')
+      this.modalCloseBtn.classList.add('prk-tingle-modal__close')
 
       this.modalCloseBtnIcon = document.createElement('span')
-      this.modalCloseBtnIcon.classList.add('tingle-modal__closeIcon')
+      this.modalCloseBtnIcon.classList.add('prk-tingle-modal__closeIcon')
       this.modalCloseBtnIcon.innerHTML = closeIcon()
 
       this.modalCloseBtnLabel = document.createElement('span')
-      this.modalCloseBtnLabel.classList.add('tingle-modal__closeLabel')
+      this.modalCloseBtnLabel.classList.add('prk-tingle-modal__closeLabel')
       this.modalCloseBtnLabel.innerHTML = this.opts.closeLabel
 
       this.modalCloseBtn.appendChild(this.modalCloseBtnIcon)
@@ -343,11 +343,11 @@
 
     // modal
     this.modalBox = document.createElement('div')
-    this.modalBox.classList.add('tingle-modal-box')
+    this.modalBox.classList.add('prk-tingle-modal-box')
 
     // modal box content
     this.modalBoxContent = document.createElement('div')
-    this.modalBoxContent.classList.add('tingle-modal-box__content')
+    this.modalBoxContent.classList.add('prk-tingle-modal-box__content')
 
     this.modalBox.appendChild(this.modalBoxContent)
 
@@ -360,7 +360,7 @@
 
   function _buildFooter () {
     this.modalBoxFooter = document.createElement('div')
-    this.modalBoxFooter.classList.add('tingle-modal-box__footer')
+    this.modalBoxFooter.classList.add('prk-tingle-modal-box__footer')
     this.modalBox.appendChild(this.modalBoxFooter)
   }
 
@@ -390,7 +390,7 @@
 
   function _handleClickOutside (event) {
     // if click is outside the modal
-    if (this.opts.closeMethods.indexOf('overlay') !== -1 && !_findAncestor(event.target, 'tingle-modal') &&
+    if (this.opts.closeMethods.indexOf('overlay') !== -1 && !_findAncestor(event.target, 'prk-tingle-modal') &&
         event.clientX < this.modal.clientWidth) {
       this.close()
     }
